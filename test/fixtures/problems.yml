@@ -2,10 +2,12 @@
 
 one:
   name: MyString
-  steps: MyText
-  files: ["google.sex","abc.com"]
+  problem_description: MyText
+  image: MyString
+  demo: MyString
 
 two:
   name: MyString
-  steps: MyText
-  files: ["google.sex","abc.com"]
+  problem_description: MyText
+  image: MyString
+  demo: MyString

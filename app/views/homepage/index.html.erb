@@ -1,0 +1,18 @@
+<div class="px-4 md:px-6 text-[#1e1e1e]">
+  <!-- Título con ícono, sobresaliendo con margen negativo -->
+  <div class="flex flex-wrap items-center gap-x-6 mb-4 -ml-4 md:-ml-6">
+    <img src="https://149860134.v2.pressablecdn.com/wp-content/uploads/pythoned.png" alt="Icono de Python" class="h-17 w-17 flex-shrink-0" />
+    <h1 class="font-serif text-6xl md:text-7xl tracking-tight" style="color: #1e1e1e; font-family: 'Crimson Text', 'Garamond', 'Baskerville', serif;">
+      Set de ejercicios
+    </h1>
+  </div>
+
+  <!-- Listado de sets alineado con el contenido principal -->
+  <% @problem_sets.each do |problem_set| %>
+    <div class="mb-2">
+      <a href="/problem_set/<%= problem_set.id %>" class="text-gray-700 hover:text-red-800 hover:underline transition-colors">
+        <%= problem_set.name %>
+      </a>
+    </div>
+  <% end %>
+</div>

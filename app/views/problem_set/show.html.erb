@@ -1,0 +1,26 @@
+<div class="py-4">
+  <!-- Título y descripción en línea horizontal con desplazamiento izquierdo -->
+  <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-4 -ml-4 md:-ml-6">
+    <h1 class="font-serif text-4xl md:text-5xl tracking-tight text-gray-900 flex-shrink-0"
+        style="color: #1e1e1e; font-family: 'Crimson Text', 'Garamond', 'Baskerville', serif;">
+      <%= @problem_set.name %>
+    </h1>
+
+    <span class="hidden md:block h-6 w-0.5 bg-red-800"></span>
+
+    <p class="text-xl md:text-2xl text-gray-700">
+      <%= @problem_set.description %>
+    </p>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4">
+    <% @problem_set.exercises.each_with_index do |exercise, index| %>
+      <% if index > 0 %>
+        <span class="text-gray-400 mx-1">•</span>
+      <% end %>
+      <a href="/problem/<%= exercise %>" class="text-gray-700 hover:text-red-800 hover:underline transition-colors">
+        <%= Problem.find(exercise).name %>
+      </a>
+    <% end %>
+  </div>
+</div>

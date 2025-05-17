@@ -22,25 +22,20 @@ default: &default
 
 development:
   <<: *default
-  host: ep-shy-river-a25bwbws-pooler.eu-central-1.aws.neon.tech
+  host: csesp-studient.j.aivencloud.com
+  port: 17258
   database: dev
-  username: neondb_owner
-  password: <%= ENV['NEON_DB_PASSWORD'] %>
-
-test:
-  <<: *default
-  host: ep-shy-river-a25bwbws-pooler.eu-central-1.aws.neon.tech
-  database: test
-  username: neondb_owner
-  password: <%= ENV['NEON_DB_PASSWORD'] %>
+  username: avnadmin
+  password: <%= ENV["DB_PASSWORD"] %>
 
 production:
   primary: &primary_production
     <<: *default
-    host: ep-winter-glade-a203i7sm-pooler.eu-central-1.aws.neon.tech
-    database: main
-    username: neondb_owner
-    password: <%= ENV["NEON_DB_PASSWORD"] %>
+    host: csesp-studient.j.aivencloud.com
+    port: 17258
+    database: defaultdb
+    username: avnadmin
+    password: <%= ENV["DB_PASSWORD"] %>
   cache:
     <<: *primary_production
     database: cache

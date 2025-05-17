@@ -1,2 +1,48 @@
 @import "tailwindcss";
-@import "flowbite/src/themes/default";
+
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+@theme {
+    /* Colores de papel (blanco con toque azulado) */
+    --color-paper-50: #f8fafc;  /* Fondo principal - blanco con sutil tinte azul */
+    --color-paper-100: #f1f5f9; /* Fondo secundario - como papel de cuaderno */
+    --color-paper-200: #e2e8f0; /* Líneas sutiles - como papel rayado */
+
+    /* Grises profesionales e institucionales */
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4b5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1f2937;
+    --color-gray-900: #111827; /* Gris oscuro neutro sin tinte azul */
+
+    /* Acento azul institucional */
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+
+    /* Acento verde para indicar éxito/completado */
+    --color-success-500: #10b981;
+    --color-success-600: #059669;
+
+    /* Tipografía */
+    --font-sans: 'Inter', 'Source Sans Pro', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif';
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Menlo', 'Monaco', 'Consolas', 'monospace';
+
+    /* Sombras más sutiles */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
