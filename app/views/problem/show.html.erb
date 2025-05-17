@@ -1,7 +1,30 @@
 <div>
   <h1 class="font-bold text-4xl"><%= @problem.name %></h1>
-  <p><%= @problem.steps %></p>
-  <% @problem.files.each do |file| %>
-    <a href="<%= file %>"><%= file %></a>
-  <% end %>
+  <p style="white-space: pre-wrap;"><%= @problem.problem_description %></p>
+
+  <div class="w-full max-w-xs mx-auto">
+    <script <%= raw @problem.demo %>></script>
+  </div>
+
+  <!-- mb-10 separa el bloque de archivos del footer -->
+  <div class="bg-slate-800 text-gray-100 rounded-xl p-5 shadow-lg border-2 border-slate-600 mt-6 mb-10 overflow-x-auto max-w-3xl mx-auto">
+    <div class="flex items-center pb-3 mb-3 border-b-2 border-slate-500">
+      <!-- botón Flowbite para el icono principal -->
+      <button type="button"
+              class="inline-flex items-center justify-center p-2 text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 focus:ring-2 focus:ring-blue-300 flex-shrink-0 mr-4">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+      </button>
+      <h3 class="font-semibold text-lg">Archivos</h3>
+    </div>
+
+      <% @problem.files.each do |file| %>
+        <% filename = file.split("/").last %>
+          <a href="<%= file %>" class="text-gray-700 hover:text-red-800 hover:underline transition-colors">
+            <%= filename %>
+          </a>
+      <% end %>
+    </div>
 </div>
