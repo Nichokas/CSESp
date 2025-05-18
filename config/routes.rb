@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "tutorial_autocorreccion", to: "tutorial_autocorreccion#index"
   get "problem/:id", to: "problem#show"
   get "problem_set/:id", to: "problem_set#show"
   root "homepage#index"
