@@ -1,30 +1,65 @@
 <div>
   <h1 class="font-bold text-4xl"><%= @problem.name %></h1>
-  <p style="white-space: pre-wrap;"><%= @problem.problem_description %></p>
+  <p style="white-space: pre-wrap;" class="mt-4"><%= @problem.problem_description %></p>
 
-  <div class="w-full max-w-xs mx-auto">
+  <details class="mt-8 mb-6 group">
+    <summary class="flex items-center cursor-pointer">
+      <span class="font-semibold text-lg text-gray-600">Pistas</span>
+      <svg class="w-5 h-5 ml-2 text-gray-500 transform transition-transform group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </summary>
+
+    <div class="pt-4 pl-4">
+      <% if @problem.respond_to?(:hints) && @problem.hints.present? %>
+        <ul class="list-disc pl-5 space-y-2">
+          <% @problem.hints.each do |hint| %>
+            <li><%= hint %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No hay pistas disponibles para este problema.</p>
+      <% end %>
+    </div>
+  </details>
+
+  <hr class="my-8 border-t border-gray-200">
+
+  <h1 class="font-bold text-2xl">Demo</h1>
+  <div class="max-w-5xl mx-auto my-8">
     <script <%= raw @problem.demo %>></script>
   </div>
 
-  <!-- mb-10 separa el bloque de archivos del footer -->
-  <div class="bg-slate-800 text-gray-100 rounded-xl p-5 shadow-lg border-2 border-slate-600 mt-6 mb-10 overflow-x-auto max-w-3xl mx-auto">
-    <div class="flex items-center pb-3 mb-3 border-b-2 border-slate-500">
-      <!-- botón Flowbite para el icono principal -->
-      <button type="button"
-              class="inline-flex items-center justify-center p-2 text-amber-700 bg-amber-50 rounded-lg hover:bg-amber-100 focus:ring-2 focus:ring-amber-200 flex-shrink-0 mr-4">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+  <div class="bg-gray-50 text-gray-800 rounded-xl p-5 shadow-lg border-2 border-gray-200 mt-8 mb-10 overflow-x-auto max-w-5xl mx-auto">
+    <div class="flex items-center justify-between pb-3 mb-3 border-b-2 border-gray-200">
+      <div class="flex items-center">
+        <button type="button"
+                class="inline-flex items-center justify-center p-2 text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 flex-shrink-0 mr-4">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        </button>
+        <h3 class="font-semibold text-lg">Archivos</h3>
+      </div>
+
+      <a href="#" id="tutorial-link" class="inline-flex items-center text-sm text-gray-600 hover:text-red-800 transition-colors">
+        <svg class="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-      </button>
-      <h3 class="font-semibold text-lg">Archivos</h3>
+        Tutorial para el uso de la autocorreccion
+      </a>
     </div>
 
+    <ul class="list-disc pl-5 space-y-2">
       <% @problem.files.each do |file| %>
         <% filename = file.split("/").last %>
+        <li>
           <a href="<%= file %>" class="text-gray-700 hover:text-red-800 hover:underline transition-colors">
             <%= filename %>
           </a>
+        </li>
       <% end %>
-    </div>
-</div>
+    </ul>
+  </div>
+  </div>
