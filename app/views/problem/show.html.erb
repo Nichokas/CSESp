@@ -5,7 +5,18 @@
 
   <hr class="border-t border-gray-200 mb-8">
 
-  <p style="white-space: pre-wrap;" class="mt-4"><%= @problem.problem_description %></p>
+  <!-- Replace the single paragraph with a flex container -->
+  <div class="flex flex-col md:flex-row gap-6 mt-4">
+    <div class="md:w-2/3">
+      <p style="white-space: pre-wrap;"><%= @problem.problem_description %></p>
+    </div>
+
+    <% if @problem.image.present? %>
+      <div class="md:w-1/3 flex justify-center items-start">
+        <img src="<%= @problem.image %>" alt="<%= @problem.name %> visual" class="rounded-lg shadow-md max-w-full object-contain">
+      </div>
+    <% end %>
+  </div>
 
   <details class="mt-8 mb-12 group">
     <summary class="flex items-center cursor-pointer">
