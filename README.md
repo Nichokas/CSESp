@@ -1,24 +1,13 @@
-# README
+# CS50 en Español
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este proyecto es una adaptación de los problemas de CS50p de Harvard, traducidos y adaptados al español. El objetivo principal es ofrecer estos recursos educativos a una audiencia de habla hispana.
 
-Things you may want to cover:
+El sitio web principal se encuentra en: https://csesp.nichokas.eu/
 
-* Ruby version
+## Herramienta de Autocorrección
 
-* System dependencies
+El proyecto incluye una herramienta que te permite probar la solución de los problemas directamente en la web.
 
-* Configuration
+---
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+*Nota: Este README es conciso ya que la información detallada sobre los problemas y el funcionamiento de la web se encuentra en el propio sitio.*
