@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_18_175757) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_21_175930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pgcrypto"
+
+  create_table "class_cs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
 
   create_table "problem_sets", force: :cascade do |t|
     t.string "name"
@@ -33,5 +40,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_18_175757) do
     t.string "files", default: [], array: true
     t.string "hints", default: [], array: true
     t.string "short_name"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "problem_sname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "classid"
   end
 end

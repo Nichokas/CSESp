@@ -128,9 +128,20 @@ async fn main() {
                     messages_received += 1;
                     sleep(Duration::from_millis(500)).await;
                 } else if messages_received == 6 {
-                    println!("Respuesta del servidor: {}", response.message.message);
-                    break 'outer;
-                }
+                    println!("Mandando informacion del alumno...");
+                    messages_received += 1;
+                    let _ = handle.text(r#"{"command": "message","identifier": "{\"channel\":\"SubmitCliChannel\"}","data": "{\"message\":\""#.to_owned() +
+                        format!("{},{},{}",
+                                cli.nombre_de_alumno.clone().unwrap(),
+                                cli.codigo_de_clase.clone().unwrap(),
+                                &p_name.strip_suffix(".py").unwrap_or(&p_name)
+                        ).as_str() +
+                        r#"\"}"}"#);
+                    sleep(Duration::from_millis(500)).await;
+                } else if messages_received == 7 {
+                println!("{}",response.message.message);
+                break 'outer;
+            }
             }
         }
 

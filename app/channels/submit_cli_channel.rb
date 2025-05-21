@@ -28,8 +28,8 @@ class SubmitCliChannel < ApplicationCable::Channel
         transmit({ message: "*/**/Problem selected/**/*" })
 
         # first try
-        @challenge_storage=ConversationProblemHelper.g_test(@problem_sname)
-        @assumption_storage=ProblemSolver.public_send(@problem_sname.to_sym, @challenge_storage)
+        @challenge_storage = ConversationProblemHelper.g_test(@problem_sname)
+        @assumption_storage = ProblemSolver.public_send(@problem_sname.to_sym, @challenge_storage)
         @c_state = :waiting_1st_challenge
         transmit({ message: "#{@challenge_storage}" })
       else
@@ -42,8 +42,8 @@ class SubmitCliChannel < ApplicationCable::Channel
         transmit({ message: "*/**/Correct/**/*" })
 
         # if correct, go with the second challenge
-        @challenge_storage=ConversationProblemHelper.g_test(@problem_sname)
-        @assumption_storage=ProblemSolver.public_send(@problem_sname.to_sym, @challenge_storage)
+        @challenge_storage = ConversationProblemHelper.g_test(@problem_sname)
+        @assumption_storage = ProblemSolver.public_send(@problem_sname.to_sym, @challenge_storage)
         transmit({ message: "#{@challenge_storage}" })
         @c_state = :waiting_2nd_challenge
       else
@@ -52,11 +52,35 @@ class SubmitCliChannel < ApplicationCable::Channel
     when :waiting_2nd_challenge
       if message_text == @assumption_storage
         transmit({ message: "*/**/Correct/**/*" })
-        transmit({ message: "*/**/Solution Validated Succesfully/**/*" })
+        transmit({ message: "*/**/Solution Validated Successfully/**/*" })
+        @c_state = :register
       else
         transmit({ message: "*/**/Solution Err/**/*" })
         @c_state = :initial # prevent program to continue
       end
+    when :register
+      things = message_text.split(",")
+      student = Student.new(
+        name: things[0].strip,
+        problem_sname: things[2].strip,
+        classid: things[1].strip,
+        )
+
+      if ClassC.find_by_id(student.classid).present?
+        if student.valid?
+          if student.save
+            transmit({ message: "*/**/Guardado correctamente/**/*" })
+            @c_state = :initial
+          else
+            transmit({ message: "*/**/Error: #{student.errors.full_messages.join(', ')}/**/*" })
+            @c_state = :initial
+          end
+        else
+          transmit({ message: "*/**/Datos de estudiante/clase no validos/**/*" })
+        end
+      else
+        transmit({ message: "*/**/Datos de estudiante/clase no validos/**/*" })
       end
     end
   end
+end
