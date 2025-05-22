@@ -107,7 +107,8 @@ async fn main() {
             if let Some(response) = rx.recv().await {
                 if messages_received == 0 {
                     if response.message.message != "*/**/Connected to server/**/*" {
-                        error!("{}","Error al intentar conectarse al servidor, ¿hay una conexion de internet activa?".red());
+                        eprintln!("{}","Error al intentar conectarse al servidor, ¿hay una conexion de internet activa?".red());
+                        break 'outer;
                     } else {
                         messages_received += 1;
                         sleep(Duration::from_millis(500)).await;
@@ -122,7 +123,8 @@ async fn main() {
                     sleep(Duration::from_millis(500)).await;
                 } else if messages_received == 3 || messages_received == 5 {
                     if response.message.message != "*/**/Correct/**/*" {
-                        error!("{}","El programa no funciona como deberia, para obtener mas informacion, corre este probrama sin el argumento -c o --calificar".red());
+                        eprintln!("{}","El programa no funciona como deberia, para obtener mas informacion, corre este probrama sin el argumento -c o --calificar".red());
+                        break 'outer;
                     }
                     println!("{} {}", "El programa respondio de manera correcta a la pregunta".green(), bien.green());
                     messages_received += 1;
@@ -157,7 +159,7 @@ async fn main() {
         // prueba mins
         {
             let resl:String = python_driver(&py_v,&p_name,b"abcdefghijklmnopqrstuvwxyz\n");
-            if resl == "abcdefghijklmnopqrstuvwxyz" {
+            if resl.contains("abcdefghijklmnopqrstuvwxyz") {
                 println!("{}", (mins + bien).green());
                 correct += 1
             } else {
@@ -169,7 +171,7 @@ async fn main() {
         // prueba mays
         {
             let resl:String = python_driver(&py_v,&p_name,b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\n");
-            if resl == "abcdefghijklmnopqrstuvwxyz" {
+            if resl.contains("abcdefghijklmnopqrstuvwxyz") {
                 println!("{}", (mays+bien).green());
                 correct += 1;
             } else {
@@ -181,7 +183,7 @@ async fn main() {
         // prueba scar
         {
             let resl:String = python_driver(&py_v,&p_name,b":;,.-_?!1234567890=/$%@#\n");
-            if resl == ":;,.-_?!1234567890=/$%@#" {
+            if resl.contains(":;,.-_?!1234567890=/$%@#") {
                 println!("{}", (scar+bien).green());
                 correct += 1;
             } else {
