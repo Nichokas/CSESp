@@ -1,19 +1,13 @@
+use async_trait::async_trait;
+use clap::Parser;
 use colored::Colorize;
+use ezsockets::ClientConfig;
+use serde::Deserialize;
 use std::io::Write;
 use std::process::{Command, Stdio};
-use clap::Parser;
-use ezsockets::ClientConfig;
-use std::io::BufRead;
-use url::Url;
-use async_trait::async_trait;
-use clap::builder::Str;
-use serde::Deserialize;
 use tokio::sync::mpsc;
 use tokio::sync::mpsc::UnboundedSender;
-use tracing::instrument::WithSubscriber;
-use serde_json::json;
 use tokio::time::{sleep, Duration, Instant};
-use tracing::error;
 
 #[derive(Parser, Debug)]
 #[command(version)]
