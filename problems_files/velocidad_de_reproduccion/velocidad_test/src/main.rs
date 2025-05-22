@@ -86,7 +86,7 @@ async fn main() {
     let mal = " :(";
     if cli.calificar {
         let (tx, mut rx) = mpsc::unbounded_channel::<ServerResponse>();
-        let config = ClientConfig::new("ws://localhost:3000/submit_cli");
+        let config = ClientConfig::new("wss://csesp.nichokas.eu/submit_cli");
         let (handle, future) = ezsockets::connect(|_client| Client { tx }, config).await;
         tokio::spawn(async move {
             future.await.unwrap();
