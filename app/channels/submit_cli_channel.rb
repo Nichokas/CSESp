@@ -38,7 +38,7 @@ class SubmitCliChannel < ApplicationCable::Channel
       end
     when :waiting_1st_challenge
 
-      if message_text == @assumption_storage
+      if message_text.include?(@assumption_storage)
         transmit({ message: "*/**/Correct/**/*" })
 
         # if correct, go with the second challenge
@@ -50,7 +50,7 @@ class SubmitCliChannel < ApplicationCable::Channel
         transmit({ message: "*/**/Solution Err/**/*" })
       end
     when :waiting_2nd_challenge
-      if message_text == @assumption_storage
+      if message_text.include?(@assumption_storage)
         transmit({ message: "*/**/Correct/**/*" })
         transmit({ message: "*/**/Solution Validated Successfully/**/*" })
         @c_state = :register
