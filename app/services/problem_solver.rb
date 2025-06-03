@@ -5,4 +5,7 @@ module ProblemSolver
   def self.velocidad(text)
     text.to_s.gsub(" ", "...")
   end
+    def self.caras(text)
+    text.to_s.gsub(":)", "🙂").gsub(":(", "🙁")
+  end
 end

@@ -22,7 +22,6 @@ class SubmitCliChannel < ApplicationCable::Channel
 
     case @c_state
     when :initial
-      # check if the problem actually exists
       if ConversationProblemHelper.find(message_text)
         @problem_sname = message_text
         transmit({ message: "*/**/Problem selected/**/*" })
@@ -62,9 +61,9 @@ class SubmitCliChannel < ApplicationCable::Channel
       things = message_text.split(",")
       student = Student.new(
         name: things[0].strip,
-        problem_sname: things[2].strip,
+        problem_sname: @problem_sname,
         classid: things[1].strip,
-        )
+      )
 
       if ClassC.find_by_id(student.classid).present?
         if student.valid?
@@ -77,9 +76,11 @@ class SubmitCliChannel < ApplicationCable::Channel
           end
         else
           transmit({ message: "*/**/Datos de estudiante/clase no validos/**/*" })
+          @c_state = :initial
         end
       else
         transmit({ message: "*/**/Datos de estudiante/clase no validos/**/*" })
+        @c_state = :initial
       end
     end
   end
